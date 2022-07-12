@@ -1,4 +1,4 @@
-let setInterval = import "interval.spwn"
+let set_interval = import "interval.spwn"
 let pixel = (r, g, b) {
     return "\u{1b}[48;2;{};{};{}m {}".fmt([@number(r), @number(g), @number(b), " "*10000])
 }
@@ -6,7 +6,7 @@ let c = [0, 0, 0]
 let r = c[0]
 let g = c[1]
 let b = c[2]
-setInterval(() {
+set_interval(() {
 	if (r <= 255 && g == 0 && b == 0) {
 		r ++;
 	}
