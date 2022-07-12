@@ -1,0 +1,34 @@
+let setInterval = import "interval.spwn"
+let pixel = (r, g, b) {
+    return "\u{1b}[48;2;{};{};{}m {}".fmt([@number(r), @number(g), @number(b), " "*10000])
+}
+let c = [0, 0, 0]
+let r = c[0]
+let g = c[1]
+let b = c[2]
+setInterval(() {
+	if (r <= 255 && g == 0 && b == 0) {
+		r ++;
+	}
+
+	if (r == 255 && b == 0 && g <= 255) {
+		g ++;
+	}
+
+	if (r == 255 && g == 255 && b <= 255) {
+		b ++;
+	}
+
+	if (b == 255 && g == 255 && r > 0) {
+		r --;
+	}
+
+	if (r == 0 && b == 255 && g > 0) {
+		g --;
+	}
+
+	if (r == 0 && g == 0 && b > 0) {
+		b --;
+	}
+    $.print("\u{1b}[?25l", pixel(r, g, b))
+}, 1)
