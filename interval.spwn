@@ -1,0 +1,29 @@
+// thanks specky for code, vrey epic 😎
+let intervals = []
+let started = false
+
+start_interval_loop = () {
+  while true {
+    for i in 0..intervals.length {
+      interval = intervals[i]
+      if $.time() > interval.last_time + interval.delay/1000 {
+        intervals[i].last_time = $.time()
+        interval.marco()
+      }
+    }
+  }
+}
+
+set_interval = (marco, delay) {
+  intervals.push({
+    marco: marco,
+    delay: delay,
+    last_time: $.time(),
+  })
+  if (!started) {
+        started = true
+        start_interval_loop()
+   }
+}
+
+return set_interval
